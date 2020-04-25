@@ -2,24 +2,36 @@ package com.itds.nearby.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
+@Configuration
+@EnableTransactionManagement
+@ComponentScan({ "com.itds.nearby.configuration" })
+@PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
-    @Autowired
-    private Environment environment;
+    private final Environment environment;
 
-    @Autowired
+    final
     DataSource dataSource;
+
+    public HibernateConfiguration(Environment environment, DataSource dataSource) {
+        this.environment = environment;
+        this.dataSource = dataSource;
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan(new String[]{"com.websystique.springmvc.model"});
+        sessionFactory.setPackagesToScan("com.itds.nearby.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

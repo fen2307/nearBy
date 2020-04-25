@@ -16,6 +16,9 @@ public class DataSourceConfig {
         .url("jdbc:oracle:thin:@nearby_high?TNS_ADMIN=C:/Users/Kamil/Desktop/kekek/Wallet_NearBy")
         .username("admin")
         .password("Ziemniak2306!")
+//                .url("jdbc:oracle:thin:@//localhost:1521/xe")
+//                .username("system")
+//                .password("admin")
         .build();
     }
 }
