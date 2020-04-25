@@ -3,22 +3,26 @@ package com.itds.nearby.configuration;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfig {
 
+    private final Environment environment;
+
+    public DataSourceConfig(Environment environment) {
+        this.environment = environment;
+    }
+
     @Bean
     public DataSource getDataSource() {
         return DataSourceBuilder.create()
-        .driverClassName("oracle.jdbc.OracleDriver")
-        .url("jdbc:oracle:thin:@nearby_high?TNS_ADMIN=C:/Users/Kamil/Desktop/kekek/Wallet_NearBy")
-        .username("admin")
-        .password("Ziemniak2306!")
-//                .url("jdbc:oracle:thin:@//localhost:1521/xe")
-//                .username("system")
-//                .password("admin")
+        .driverClassName(environment.getRequiredProperty("oracle.driverName"))
+        .url(environment.getRequiredProperty("oracle.url"))
+        .username(environment.getRequiredProperty("oracle.login"))
+        .password(environment.getRequiredProperty("oracle.password"))
         .build();
     }
 }
