@@ -15,29 +15,30 @@ public class ClientController {
         this.repository = repository;
     }
 
-    // Aggregate root
-
     @GetMapping("/clients")
-    List<Client> all() {
+    List<Client> getAll() {
         return repository.findAllClients();
     }
 
     @PostMapping("/clients")
-    void newEmployee(@RequestBody Client newClient) {
-        repository.save(newClient);
+    void newClient(@RequestBody Client client) {
+        repository.save(client);
     }
 
-    // Single item
+    @PutMapping("/clients")
+    void updateClient(@RequestBody Client client) {
+        repository.update(client);
+    }
 
     @GetMapping("/clients/{id}")
-    Client one(@PathVariable int id) {
+    Client findClientById(@PathVariable int id) {
         return repository.findById(id);
     }
 
+    @DeleteMapping("/clients/{id}")
+    void deleteClient(@PathVariable int id) {
+        repository.delete(repository.findById(id));
+    }
 
-//    @DeleteMapping("/employees/{id}")
-//    void deleteEmployee(@PathVariable Long id) {
-//        repository.deleteById(id);
-//    }
 }
 

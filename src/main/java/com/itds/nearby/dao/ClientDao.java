@@ -9,5 +9,9 @@ public interface ClientDao {
 
     void save(Client client);
 
+    void update(Client client);
+
+    void delete(Client client);
+
     List<Client> findAllClients();
 }

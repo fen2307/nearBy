@@ -19,6 +19,16 @@ public class ClientDaoImpl extends AbstractDao<Integer, Client> implements Clien
     }
 
     @Override
+    public void delete(Client client) {
+        deleteEntity(client);
+    }
+
+    @Override
+    public void update(Client client) {
+        updateEntity(client);
+    }
+
+    @Override
     public List<Client> findAllClients() {
         Criteria criteria = createEntityCriteria().addOrder(Order.asc("login"));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
