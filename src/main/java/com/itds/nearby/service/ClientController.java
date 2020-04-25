@@ -39,6 +39,5 @@ public class ClientController {
     void deleteClient(@PathVariable int id) {
         repository.delete(repository.findById(id));
     }
-
 }
 

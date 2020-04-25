@@ -1,6 +1,5 @@
 package com.itds.nearby.dao;
 
-import com.itds.nearby.model.Client;
 import com.itds.nearby.model.Service;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
