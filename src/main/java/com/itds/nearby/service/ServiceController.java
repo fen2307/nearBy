@@ -1,6 +1,8 @@
 package com.itds.nearby.service;
 
+import com.itds.nearby.dao.LocalServicesDao;
 import com.itds.nearby.dao.ServicesDao;
+import com.itds.nearby.model.LocalService;
 import com.itds.nearby.model.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,14 +11,21 @@ import java.util.List;
 @RestController
 public class ServiceController {
     private final ServicesDao repository;
+    private final LocalServicesDao localServicesDao;
 
-    public ServiceController(ServicesDao repository) {
+    public ServiceController(ServicesDao repository, LocalServicesDao localServicesDao) {
         this.repository = repository;
+        this.localServicesDao = localServicesDao;
     }
 
     @GetMapping("/services")
     List<Service> all() {
         return repository.findAllServices();
+    }
+
+    @GetMapping("/localservices/{id}")
+    List<LocalService> allLocal(@PathVariable int id) {
+        return localServicesDao.findAllLocalServices(id);
     }
 
     @PostMapping("/services")
