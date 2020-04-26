@@ -1,5 +1,6 @@
 package com.itds.nearby.auth;
 
+import com.itds.nearby.dao.UserRepository;
 import com.itds.nearby.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

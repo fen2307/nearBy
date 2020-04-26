@@ -1,4 +1,4 @@
-package com.itds.nearby.auth;
+package com.itds.nearby.dao;
 
 import java.util.Optional;
 
