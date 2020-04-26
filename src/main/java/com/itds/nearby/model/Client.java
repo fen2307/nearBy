@@ -18,14 +18,17 @@ public class Client implements Serializable {
     @Column(name = "PASSWORD", nullable=false)
     private String password;
 
-    @Column(name = "LATITUDE", nullable=false)
-    private BigDecimal latitude;
+    @Column(name = "LATITUDE")
+    private Double latitude;
 
-    @Column(name = "LONGITUDE", nullable=false)
-    private BigDecimal longitude;
+    @Column(name = "LONGITUDE")
+    private Double longitude;
 
     @Column(name = "EMAIL", nullable=false)
     private String email;
+
+    @Column(name = "ADDRESS", nullable = false)
+    private String address;
 
     public Integer getIdCli() {
         return idCli;
@@ -51,19 +54,19 @@ public class Client implements Serializable {
         this.password = password;
     }
 
-    public BigDecimal getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -75,6 +78,14 @@ public class Client implements Serializable {
         this.email = email;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,14 +94,15 @@ public class Client implements Serializable {
         return idCli.equals(client.idCli) &&
                 login.equals(client.login) &&
                 password.equals(client.password) &&
-                latitude.equals(client.latitude) &&
-                longitude.equals(client.longitude) &&
-                email.equals(client.email);
+                Objects.equals(latitude, client.latitude) &&
+                Objects.equals(longitude, client.longitude) &&
+                email.equals(client.email) &&
+                address.equals(client.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idCli, login, password, latitude, longitude, email);
+        return Objects.hash(idCli, login, password, latitude, longitude, email, address);
     }
 
     @Override
@@ -102,6 +114,7 @@ public class Client implements Serializable {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
